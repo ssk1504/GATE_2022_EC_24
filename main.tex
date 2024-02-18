@@ -52,42 +52,73 @@ The conduction current (in Amperes) through the resistor is $2\sin\brak{t + \fra
     \label{tab:tab_gate_ec_2022_24_1}
 \end{table}
 
+
+\begin{table}[ht]
+     \begin{adjustbox}{width=\columnwidth}
+       \input{tables/table2}
+    \end{adjustbox}
+    \caption{Formulae}
+    \label{tab:tab_gate_ec_2022_24_2}
+\end{table}
+
+\begin{table}[ht]
+     \begin{adjustbox}{width=\columnwidth}
+       \input{tables/table3}
+    \end{adjustbox}
+    \caption{Laplace transforms}
+    \label{tab:tab_gate_ec_2022_24_3}
+\end{table}
+
+\begin{align}
+    \mathcal{L}\sbrak{\int f\brak{t}\, dt} &= \int_{0}^{\infty}\sbrak{\int f\brak{t}\, dt}e^{-st}\, dt\\
+    &= \int_{0}^{\infty}u\, dv \quad \text{where}\begin{cases}
+  u =\int f\brak{t}dt \\
+  dv  =e^{-st}dt
+\end{cases}\\
+&= uv - v\int du\\
+&= \frac{1}{s}\int f\brak{t}dt|_0 + \frac{1}{s}\int_{0}^{\infty}f\brak{t}e^{-st}dt\\
+&\implies \frac{1}{s}\int f\brak{t}dt|_0 + \frac{1}{s}F\brak{s} \label{eq:eq_gate_ec_2022_24_1}
+\end{align}
+
+
 \begin{figure}[ht]
   \centering
       \input{figs/ckt1}
   \caption{Circuit 1}
 \end{figure}
 
-From Table \ref{tab:tab_gate_ec_2022_24_1}
+From Table \ref{tab:tab_gate_ec_2022_24_2} and Table \ref{tab:tab_gate_ec_2022_24_3} and eq \ref{eq:eq_gate_ec_2022_24_1}
 \begin{align}
-    J &= \overline{J_c} + \overline{J_d}
+    I_c\brak{s} &= \frac{2s}{s^2 + 1}\\
+    Q_c\brak{s} &= \frac{2}{s^2 + 1}\\
+    D\brak{s} &= \frac{1}{A}\brak{\frac{2}{s^2 + 1}}\\
+    J_D\brak{s} &= \frac{2}{A}\brak{\frac{s}{s^2 + 1}}\\
+    I_D\brak{s} &= \frac{2s}{s^2 + 1}\\
+    \implies I_D &= 2\sin{t}
 \end{align}
-%\newpage
-
 
 
 \begin{figure}[ht]
   \centering
       \input{figs/plot1}
   \caption{Phasor plot}
+  \label{fig:fig_gate_ec_2022_24_1}
 \end{figure}
-From figure \ref{fig:fig_gate_ec_2022_24_1},\\
-$\overline{J_d}$ leads $\overline{J_c}$ by $\frac{\pi}{2}$ $\implies$  $i_d$ leads $i_c$ by $\frac{\pi}{2}$\\
 
-Hence,
+From figure \ref{fig:fig_gate_ec_2022_24_1}, phase of $I_d$ is $\frac{\pi}{2}$
+
 \begin{align}
-    i_d &= 2\sin\brak{t + \frac{\pi}{2} + \frac{\pi}{2}}\\
-    \implies i_d &= 2\sin\brak{t+\pi}
+    \therefore I_d = 2\sin\brak{t + \frac{\pi}{2}}
 \end{align}
-
-$\therefore$ (B) is correct.
+$\therefore$ (C) is correct.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\columnwidth]{figs/Figure_1.png}
-    \caption{Plot of $i_c$ and $i_d$ vs time}
-    \label{fig:fig_gate_ec_2022_24_1}
+    \caption{plot of $I_d$ vs time}
+    \label{fig:fig_gate_ec_2022_24_2}
 \end{figure}
+
 
 
 
