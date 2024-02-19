@@ -1,33 +1,40 @@
 #include <stdio.h>
 #include <math.h>
 
-#define NUM_POINTS 1000
+#define SIZE 1000
 
 int main() {
-    FILE *fp1, *fp2;
-    fp1 = fopen("data1.txt", "w");
-    //fp2 = fopen("data2.txt", "w");
+    FILE *file_theoretical = fopen("data_theoretical.txt", "w");
+    FILE *file_practical = fopen("data_practical.txt", "w");
 
-    if (fp1 == NULL) {
+    if (file_theoretical == NULL || file_practical == NULL) {
         printf("Error opening files.\n");
         return 1;
     }
 
-    double t, i_d;
+    double t[SIZE];
+    double theoretical[SIZE];
+    double practical[SIZE];
 
-    for (int i = 0; i < NUM_POINTS; i++) {
-        t = i * 10.0 / (NUM_POINTS - 1); // Time values from 0 to 10
-        i_d = 2 * sin(t + M_PI / 2); // Conduction current function
-        //i_d = 2 * sin(t + M_PI); // Displacement current function
-
-        fprintf(fp1, "%.6f %.6f\n", t, i_d); // Write coordinates to data1.txt
-        //fprintf(fp2, "%.6f %.6f\n", t, i_d); // Write coordinates to data2.txt
+    // Generate coordinates for theoretical displacement current
+    for (int i = 0; i < SIZE; i++) {
+        t[i] = 0.01 * i;
+        theoretical[i] = sin(t[i] + M_PI/2);
+        fprintf(file_theoretical, "%.6f %.6f\n", t[i], theoretical[i]);
     }
 
-    fclose(fp1);
-    //fclose(fp2);
+    // Generate coordinates for practical displacement current
+    double voltage = 0;
+    for (int i = 0; i < SIZE; i++) {
+        voltage = voltage + (1.0 / 1.0) * (theoretical[i] - voltage / 1.0) * (t[i] - t[i-1]);
+        practical[i] = voltage;
+        fprintf(file_practical, "%.6f %.6f\n", t[i], practical[i]);
+    }
 
-    printf("Data generation and saving completed.\n");
+    fclose(file_theoretical);
+    fclose(file_practical);
+    
+    printf("Data generated Successfully\n");
 
     return 0;
 }

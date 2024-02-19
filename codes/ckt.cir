@@ -1,0 +1,7 @@
+* NGSpice circuit for displacement current measurement
+Vs 1 0 0V
+R 1 2 1  
+C 2 0 1uF 
+.ic V(2)=0
+.tran 0.01s 10s
+.end
